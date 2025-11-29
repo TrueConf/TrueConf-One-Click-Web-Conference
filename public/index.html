@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">TrueConf Conference Connection Example</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com  ">
+    <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans  :ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/media/favicon.ico">
+</head>
+<body>
+    <main>
+        <div class="reg" id="reg">
+            <span class="j7" data-i18n="doctor_invites">Doctor invites you to a conference!</span>
+            <div class="menu">
+                <p data-i18n="enter_name">Enter your name:</p>
+                <input type="text" id="name" class="name">
+            </div>
+            <button id="fetchBtn" data-i18n="enter_button">Enter</button>
+        </div>
+        <div class="overlay" id="overlay"></div>
+        <div class="iframe-container" id="iframe-container"></div>
+    </main>
+
+    <div id="result"></div>
+    <nav class="language-switcher">
+      <a href="/en">EN</a> |
+      <a href="/ru">RU</a>
+    </nav>
+    <!--ENV-->
+    <script>
+
+      (async () => {
+        const currentLang = window.APP_CONFIG?.CURRENT_LANGUAGE || 'en';
+        try {
+          const response = await fetch(`./locales/${currentLang}.json`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          window.i18nData = { [currentLang]: await response.json() };
+        } catch (error) {
+          console.error('Ошибка загрузки переводов:', error);
+          window.i18nData = {};
+        }
+      })();
+    </script>
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
