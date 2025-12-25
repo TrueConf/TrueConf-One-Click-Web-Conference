@@ -38,8 +38,8 @@ How it works:
 
 1. The doctor and the patient are already authenticated in the medical services system (hereinafter — the **Website**) and each has a unique user identifier (ID) obtained at sign-in.
 
-    > [!TIP]
-    > In this example, the doctor already has an account on TrueConf Server, so we can use their TrueConf ID. In real-world scenarios where the doctor does not have an account on the server, you need to generate a TrueConf ID on the fly, as shown below in the patient example.
+> [!TIP]
+> In this example, the doctor already has an account on TrueConf Server, so we can use their TrueConf ID. In real-world scenarios where the doctor does not have an account on the server, you need to generate a TrueConf ID on the fly, as shown below in the patient example.
 
 2. While chatting with the patient on the Website, the doctor determines that an online meeting is required and clicks the button to create a conference.
 3. The Website then sends an invitation message to the chat, and the patient is presented with a connection form.
