@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://trueconf.com" target="_blank" rel="noopener noreferrer">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/logo.svg" type="image/svg">
-      <img width="150" src="assets/logo.svg" type="image/svg">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/TrueConf/.github/refs/heads/main/logos/logo-dark.svg">
+      <img width="150" alt="trueconf" src="https://raw.githubusercontent.com/TrueConf/.github/refs/heads/main/logos/logo.svg">
     </picture>
   </a>
 </p>
@@ -32,28 +32,22 @@
 
 ## Description
 
-**Case:** On your website, a doctor can invite a patient to a video conference
-without requiring complex actions. In the chat, the doctor clicks the "Invite to
-conference" button, and a form appears for the patient to enter their name. With
-one click, a guest account and conference are created. The patient automatically
-joins the conference without any additional steps.
+**Case:** On your website, a doctor can invite a patient to a video conference without requiring any complicated steps on the patient’s side. In the chat, the doctor clicks **Invite to conference**, and the patient is shown a form where they enter their name. With a single click, a guest account and a conference are created. The patient is automatically connected to the conference without any additional steps.
 
 How it works:
 
-1. The doctor and patient are already authorized on the site and have unique IDs.
-1. The doctor clicks a button on the site to create a conference.
-1. The patient fills out the form, enters their name (or it is automatically
-retrieved from the personal area if necessary), and clicks the "Connect"
-button.
-1. A script on the website (or backend) via the TrueConf Server API automatically
-creates a guest account for the patient using their unique ID and initiates a
-new video conference.
-1. The patient instantly connects to the conference with the specified name and
-unique ID.
+1. The doctor and the patient are already authenticated in the medical services system (hereinafter — the **Website**) and each has a unique user identifier (ID) obtained at sign-in.
 
-Thus, this project showcases the integration of TrueConf video conferencing with
-any website, providing a quick and easy process for connecting participants,
-minimizing additional steps, and simplifying interaction for users.
+    > [!TIP]
+    > In this example, the doctor already has an account on TrueConf Server, so we can use their TrueConf ID. In real-world scenarios where the doctor does not have an account on the server, you need to generate a TrueConf ID on the fly, as shown below in the patient example.
+
+2. While chatting with the patient on the Website, the doctor determines that an online meeting is required and clicks the button to create a conference.
+3. The Website then sends an invitation message to the chat, and the patient is presented with a connection form.
+4. The patient sees the form in the chat, fills it out by entering their name (or it can be auto-filled from the user account if needed), and clicks **Join**.
+5. A script on the Website automatically uses the TrueConf Server API to create a guest account for the patient based on their unique ID and starts a new video conference.
+6. The patient instantly joins the conference using the specified name and unique ID.
+
+Thus, this project showcases the integration of TrueConf video conferencing with any website, providing a quick and easy process for connecting participants, minimizing additional steps, and simplifying interaction for users.
 
 ## Preliminary Actions
 
@@ -102,16 +96,18 @@ npm run dev
 npm start
 ```
 
-Then open `https://localhost:<PORT>` in your browser and enter your username. The
-web application will generate the conference payload (including access rights,
-invitations, and other data) and send it to the backend. The backend will
-perform the following steps:
+>[!TIP]
+> If TrueConf Server uses a self-signed TLS certificate, the browser may block the page from loading (including inside an iframe) until the certificate is marked as trusted.
+>
+> Open TrueConf Server directly in the browser, for example https://10.110.2.240, confirm the security warning, and add an exception (or install the certificate as trusted). After that, the guest page and HTTPS embedding will work correctly.
 
-1. Requests an OAuth access token from your TrueConf server.
-1. Creates and launches a conference, assigning ownership to the user whose
-TrueConf ID was specified.
-1. Receive the iframe and return it to the frontend, which will display the
-conference as a web application on your website.
+Then open the address shown in the terminal after the project starts. By default, it is `http://localhost:3000`. In the window that opens, enter the patient’s name.
+
+The web application will generate the conference payload (including access rights, invitations, and other data) and send it to the backend. The backend will perform the following steps:
+
+1. Request an OAuth access token from your TrueConf Server.
+1. Create and start a conference, assigning the doctor as the owner (the doctor’s TrueConf ID is specified in the `.env` file above).
+1. Retrieve the iframe HTML and return it to the frontend, which will render the conference as a web application on your website.
 
 ## Frontend Architecture
 
@@ -180,4 +176,4 @@ self-signed certificates).
 - [Automatic deletion of conferences with TrueConf API](https://trueconf.com/blog/knowledge-base/how-to-delete-past-meetings-automatically)
 - [How to connect a guest to a conference directly](https://trueconf.com/blog/knowledge-base/how-to-connect-a-guest-to-a-conference-directly)
 - [How to Use TrueConf API to Make Video Calls from the Website](https://trueconf.com/blog/knowledge-base/how-to-use-trueconf-api-to-make-video-calls-from-the-website)
-- [Embedding TrueConf video conferencing into your website](https://trueconf.com/blog/knowledge-base/embedding-trueconf-video-conferencing-into-your-website).
+- [Embedding TrueConf video conferencing into your website](https://trueconf.com/blog/knowledge-base/embedding-trueconf-video-conferencing-into-your-website)
